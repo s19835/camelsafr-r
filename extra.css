@@ -23,10 +23,14 @@ body {
 }
 
 /* ── Navbar ─────────────────────────────────────────────── */
-.navbar {
+.navbar,
+.navbar.bg-light,
+.navbar[data-bs-theme="light"] {
   background: #ffffff !important;
-  border-bottom: 1px solid #e8e8e8;
-  box-shadow: none;
+  background-color: #ffffff !important;
+  --bs-navbar-bg: #ffffff;
+  border-bottom: 1px solid #e8e8e8 !important;
+  box-shadow: none !important;
   padding: 10px 0;
 }
 .navbar-brand {
@@ -125,12 +129,15 @@ th {
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin: 24px 0 32px;
+  align-items: stretch;
 }
 .ca-card {
   border: 1px solid #e8e8e8;
   border-radius: 12px;
   padding: 20px;
   background: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 .ca-card-fn {
   font-family: 'JetBrains Mono', monospace;
