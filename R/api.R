@@ -71,6 +71,21 @@ ca_basins <- function(level = "L1", cache = FALSE) {
 #' @export
 #' @examples
 #' ca_info()
+ca_info <- function() {
+  cat("CAMELS-Afr dataset summary\n")
+  cat("  Levels:\n")
+  cat("    L1:  37 basins\n")
+  cat("    L2:  238 basins\n")
+  cat("    L3:  3,533 basins\n")
+  cat("    L4:  12,129 basins\n")
+  cat("  Static attributes: 216 per basin (climate, hydrology, location, geology, soil, land cover)\n")
+  cat("  Timeseries: daily / monthly / annual (1980-2024)\n")
+  cat("  Precipitation products: ARC, CHIRPS, IMERG, MSWEP\n")
+  cat("  CDN:", "https://d3w56ds7wplvdd.cloudfront.net/parquet/", "\n")
+  cat("  Cache:", tools::R_user_dir("camelsafr", "cache"), "\n")
+  invisible(NULL)
+}
+
 #' Return climate timeseries for the given level and frequency
 #'
 #' @param level Character. One of \code{"L1"}, \code{"L2"}, \code{"L3"}, \code{"L4"}.
@@ -105,19 +120,4 @@ ca_timeseries <- function(level = "L1", basin_ids = NULL, freq = "annual",
   }
 
   data.table::as.data.table(tbl)
-}
-
-ca_info <- function() {
-  cat("CAMELS-Afr dataset summary\n")
-  cat("  Levels:\n")
-  cat("    L1:  37 basins\n")
-  cat("    L2:  238 basins\n")
-  cat("    L3:  3,533 basins\n")
-  cat("    L4:  12,129 basins\n")
-  cat("  Static attributes: 216 per basin (climate, hydrology, location, geology, soil, land cover)\n")
-  cat("  Timeseries: daily / monthly / annual (1980-2024)\n")
-  cat("  Precipitation products: ARC, CHIRPS, IMERG, MSWEP\n")
-  cat("  CDN:", "https://d3w56ds7wplvdd.cloudfront.net/parquet/", "\n")
-  cat("  Cache:", tools::R_user_dir("camelsafr", "cache"), "\n")
-  invisible(NULL)
 }
