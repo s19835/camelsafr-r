@@ -22,7 +22,7 @@ ca_attrs <- function(level = "L1", cache = FALSE) {
       tbl          <- read_parquet_url(url, cache = cache)
       frames[[cat]] <- data.table::as.data.table(tbl)
     }, error = function(e) {
-      NULL  # ponytail: silent skip; promote to warning() if users need visibility into partial failures
+      warning(sprintf("Skipping category '%s': %s", cat, conditionMessage(e)))
     })
   }
   if (length(frames) == 0L) {

@@ -20,7 +20,7 @@ test_that("ca_attrs skips files that error", {
     if (call_count == 1L) stop("HTTP 404")
     fake_dt[, .(Basin_ID, p_mean)]
   })
-  expect_warning(result <- ca_attrs("L1"), NA)  # silent skip — no warning emitted
+  expect_warning(result <- ca_attrs("L1"), regexp = "Skipping category")
   expect_s3_class(result, "data.table")
 })
 
