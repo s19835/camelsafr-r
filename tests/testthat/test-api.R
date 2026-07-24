@@ -74,3 +74,59 @@ test_that("ca_clear_cache on empty cache is safe", {
   mockery::stub(ca_clear_cache, "tools::R_user_dir", function(...) tempfile())
   expect_invisible(ca_clear_cache())
 })
+
+# ── ca_timeseries ─────────────────────────────────────────────────────────────
+
+test_that("ca_timeseries rejects invalid level", {
+  expect_error(ca_timeseries(level = "L99"), "level must be one of")
+})
+
+test_that("ca_timeseries rejects invalid freq", {
+  expect_error(ca_timeseries(level = "L1", freq = "decadal"), "freq must be one of")
+})
+
+test_that("ca_timeseries returns data.table", {
+  mockery::stub(ca_timeseries, "read_parquet_url",
+                function(...) fake_arrow_table(fake_annual_dt))
+  result <- ca_timeseries(level = "L1", freq = "annual")
+  expect_s3_class(result, "data.table")
+})
+
+test_that("ca_timeseries filters by basin_ids", {
+  mockery::stub(ca_timeseries, "read_parquet_url",
+                function(...) fake_arrow_table(fake_annual_dt))
+  result <- ca_timeseries(level = "L1", freq = "annual", basin_ids = "L1_001")
+  expect_true(all(result$Basin_ID == "L1_001"))
+  expect_equal(nrow(result), 2L)  # fake_annual_dt has 2 rows for L1_001
+})
+
+test_that("ca_timeseries selects variables + Basin_ID + time col", {
+  mockery::stub(ca_timeseries, "read_parquet_url",
+                function(...) fake_arrow_table(fake_annual_dt))
+  result <- ca_timeseries(level = "L1", freq = "annual", variables = "p_arc")
+  expect_true("Basin_ID" %in% names(result))
+  expect_true("Year" %in% names(result))
+  expect_true("p_arc" %in% names(result))
+  expect_false("pet_mean" %in% names(result))
+})
+
+test_that("ca_timeseries uses correct URL for annual", {
+  captured_url <- NULL
+  mockery::stub(ca_timeseries, "read_parquet_url", function(url, ...) {
+    captured_url <<- url
+    fake_arrow_table(fake_annual_dt)
+  })
+  ca_timeseries(level = "L2", freq = "annual")
+  expect_true(grepl("L2_climate_annual\\.parquet$", captured_url))
+})
+
+test_that("ca_timeseries daily uses Date as time column", {
+  daily_dt <- data.table::data.table(
+    Basin_ID = "L1_001", Date = as.Date("1980-01-01"), p_arc = 1.2
+  )
+  mockery::stub(ca_timeseries, "read_parquet_url",
+                function(...) fake_arrow_table(daily_dt))
+  result <- ca_timeseries(level = "L1", freq = "daily", variables = "p_arc")
+  expect_true("Date" %in% names(result))
+  expect_false("Year" %in% names(result))
+})

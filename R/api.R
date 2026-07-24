@@ -71,6 +71,42 @@ ca_basins <- function(level = "L1", cache = FALSE) {
 #' @export
 #' @examples
 #' ca_info()
+#' Return climate timeseries for the given level and frequency
+#'
+#' @param level Character. One of \code{"L1"}, \code{"L2"}, \code{"L3"}, \code{"L4"}.
+#' @param basin_ids Character vector or \code{NULL}. Filter to specific basins.
+#'   \code{NULL} returns all basins.
+#' @param freq Character. One of \code{"daily"}, \code{"monthly"}, \code{"annual"}.
+#'   Default \code{"annual"}.
+#' @param variables Character vector or \code{NULL}. Columns to return (excluding
+#'   \code{Basin_ID} and the time column, which are always included). \code{NULL}
+#'   returns all columns.
+#' @param cache Logical. Default \code{FALSE}.
+#' @return A \code{data.table}.
+#' @export
+#' @examples
+#' \dontrun{
+#' ts <- ca_timeseries("L1", basin_ids = c("L1_001"), freq = "annual",
+#'                     variables = c("p_arc", "pet_mean"))
+#' }
+ca_timeseries <- function(level = "L1", basin_ids = NULL, freq = "annual",
+                           variables = NULL, cache = FALSE) {
+  validate_level(level)
+  validate_freq(freq)
+
+  time_col   <- if (freq == "annual") "Year" else "Date"
+  url        <- url_timeseries(level, freq)
+  col_select <- if (is.null(variables)) NULL else c("Basin_ID", time_col, variables)
+
+  tbl <- read_parquet_url(url, cache = cache, col_select = col_select)
+
+  if (!is.null(basin_ids)) {
+    tbl <- dplyr::filter(tbl, Basin_ID %in% basin_ids)
+  }
+
+  data.table::as.data.table(tbl)
+}
+
 ca_info <- function() {
   cat("CAMELS-Afr dataset summary\n")
   cat("  Levels:\n")
