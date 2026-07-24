@@ -1,0 +1,31 @@
+Package: camelsafr
+Type: Package
+Title: R Client for the CAMELS-Afr African Basin Hydrological Database
+Version: 0.1.0
+Authors@R: person("Maria", "Niranjan", email = "M.Niranjan@cgiar.org",
+    role = c("aut", "cre"))
+Description: Provides one-line access to the CAMELS-Afr dataset of 216
+    basin attributes and 44 years of daily climate timeseries for African
+    river basins across four spatial levels (L1-L4). Data is fetched from
+    a CloudFront-hosted Parquet store using the arrow package.
+License: MIT + file LICENSE
+URL: https://github.com/s19835/camelsafr-r
+BugReports: https://github.com/s19835/camelsafr-r/issues
+Imports:
+    arrow (>= 12.0.0),
+    data.table (>= 1.14.0)
+Suggests:
+    testthat (>= 3.0.0),
+    mockery,
+    devtools,
+    roxygen2,
+    pkgdown,
+    ggplot2,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3
+Depends:
+    R (>= 4.1.0)
