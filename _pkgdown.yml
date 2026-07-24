@@ -1,0 +1,43 @@
+url: https://s19835.github.io/camelsafr-r
+
+template:
+  bootstrap: 5
+  includes:
+    in_header: |
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+navbar:
+  bg: light
+  structure:
+    left: [intro, reference]
+    right: [news, github]
+  components:
+    intro:
+      text: Get Started
+      href: articles/quickstart.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: News
+      href: news/index.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/s19835/camelsafr-r
+      aria-label: GitHub
+
+reference:
+- title: "Load data"
+  contents:
+  - ca_attrs
+  - ca_basins
+  - ca_timeseries
+- title: "Utilities"
+  contents:
+  - ca_info
+  - ca_clear_cache
+
+home:
+  strip_header: true
