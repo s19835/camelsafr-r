@@ -17,12 +17,14 @@ Imports:
 Suggests:
     testthat (>= 3.0.0),
     mockery,
+    withr,
     devtools,
     roxygen2,
     pkgdown,
     ggplot2,
     knitr,
-    rmarkdown
+    rmarkdown,
+    dplyr
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.3.2
