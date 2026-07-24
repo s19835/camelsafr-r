@@ -63,13 +63,20 @@ a { color: #2383e2; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* ── Code blocks ────────────────────────────────────────── */
-pre, .sourceCode {
+/* Target pre only — div.sourceCode is pkgdown's outer wrapper, not the code block */
+pre {
   background: #f7f7f7 !important;
   border: 1px solid #e8e8e8 !important;
   border-radius: 8px !important;
   font-size: 13px;
   padding: 14px 16px;
   box-shadow: none !important;
+}
+div.sourceCode {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 code {
   background: #f7f7f7;
