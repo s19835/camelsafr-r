@@ -7,7 +7,11 @@ cache_path <- function(level, filename) {
 #' @keywords internal
 download_parquet <- function(url, dest) {
   dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
-  utils::download.file(url, dest, mode = "wb", quiet = TRUE)
+  status <- utils::download.file(url, dest, mode = "wb", quiet = TRUE)
+  if (status != 0L) {
+    unlink(dest)
+    stop(sprintf("Failed to download %s (exit status %d)", url, status))
+  }
   invisible(NULL)
 }
 
@@ -17,7 +21,7 @@ download_parquet <- function(url, dest) {
 #' @param col_select Character vector of columns to read, or NULL for all.
 #' @param filters Named list of equality filters, e.g. `list(Basin_ID = c("L1_001"))`.
 #' @param cache Logical. Cache downloaded file locally? Default FALSE.
-#' @return A `data.table`.
+#' @return An Arrow Table (class `ArrowTabular`), allowing downstream predicate pushdown.
 #' @keywords internal
 read_parquet_url <- function(url, col_select = NULL, filters = NULL, cache = FALSE) {
   if (cache) {
@@ -42,7 +46,7 @@ read_parquet_url <- function(url, col_select = NULL, filters = NULL, cache = FAL
     }
   }
 
-  data.table::as.data.table(tbl)
+  tbl
 }
 
 #' Clear the camelsafr local Parquet cache
