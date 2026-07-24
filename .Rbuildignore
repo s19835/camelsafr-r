@@ -4,3 +4,7 @@
 ^\\.Rproj\\.user$
 ^docs$
 ^pkgdown$
+^\.superpowers$
+^_pkgdown\.yml$
+^index\.md$
+^LICENSE\.md$

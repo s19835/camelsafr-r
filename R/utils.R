@@ -1,3 +1,5 @@
+utils::globalVariables(c("Basin_ID", ".data", "..keep"))
+
 #' @keywords internal
 VALID_LEVELS <- c("L1", "L2", "L3", "L4")
 
