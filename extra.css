@@ -14,9 +14,11 @@ body {
   line-height: 1.6;
 }
 
-/* ── Content width ──────────────────────────────────────── */
-.container, .container-fluid {
-  max-width: 760px;
+/* ── Content width (exclude navbar which needs full width) ── */
+main .container,
+.row-offcanvas .container,
+.container-fluid:not(.navbar > .container-fluid) {
+  max-width: 960px;
 }
 .row > .col-md-9 {
   max-width: 720px;
