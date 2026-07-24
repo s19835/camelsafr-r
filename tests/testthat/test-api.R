@@ -102,7 +102,11 @@ test_that("ca_timeseries filters by basin_ids", {
 
 test_that("ca_timeseries selects variables + Basin_ID + time col", {
   mockery::stub(ca_timeseries, "read_parquet_url",
-                function(...) fake_arrow_table(fake_annual_dt))
+                function(url, cache = FALSE, col_select = NULL) {
+                  tbl <- fake_arrow_table(fake_annual_dt)
+                  if (!is.null(col_select)) tbl <- tbl$select(col_select)
+                  tbl
+                })
   result <- ca_timeseries(level = "L1", freq = "annual", variables = "p_arc")
   expect_true("Basin_ID" %in% names(result))
   expect_true("Year" %in% names(result))
@@ -129,4 +133,9 @@ test_that("ca_timeseries daily uses Date as time column", {
   result <- ca_timeseries(level = "L1", freq = "daily", variables = "p_arc")
   expect_true("Date" %in% names(result))
   expect_false("Year" %in% names(result))
+})
+
+test_that("ca_timeseries stops with URL on fetch error", {
+  mockery::stub(ca_timeseries, "read_parquet_url", function(...) stop("connection refused"))
+  expect_error(ca_timeseries("L1", freq = "annual"), regexp = "Failed to fetch")
 })

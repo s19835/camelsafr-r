@@ -113,7 +113,13 @@ ca_timeseries <- function(level = "L1", basin_ids = NULL, freq = "annual",
   url        <- url_timeseries(level, freq)
   col_select <- if (is.null(variables)) NULL else c("Basin_ID", time_col, variables)
 
-  tbl <- read_parquet_url(url, cache = cache, col_select = col_select)
+  tbl <- tryCatch(
+    read_parquet_url(url, cache = cache, col_select = col_select),
+    error = function(e) {
+      stop(sprintf("Failed to fetch timeseries from %s: %s", url, conditionMessage(e)),
+           call. = FALSE)
+    }
+  )
 
   if (!is.null(basin_ids)) {
     tbl <- dplyr::filter(tbl, Basin_ID %in% basin_ids)
