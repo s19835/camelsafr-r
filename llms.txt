@@ -1,0 +1,56 @@
+One-line access to the
+[CAMELS-Afr](https://github.com/s19835/camelsafr-r) African basin
+hydrological database — 12,129 basins, 216 attributes, 44 years of daily
+climate data.
+
+## Install
+
+``` r
+# Development version
+remotes::install_github("s19835/camelsafr-r")
+```
+
+## Core functions
+
+``` R
+<div class="ca-card-fn">ca_attrs()</div>
+<div class="ca-card-desc">Static basin attributes — 216 columns across climate, hydrology, soil, geology, land cover, and location for L1–L4.</div>
+```
+
+``` R
+<div class="ca-card-fn">ca_timeseries()</div>
+<div class="ca-card-desc">Daily, monthly, or annual climate series. Filter by basin IDs and select variables. Returns a data.table.</div>
+```
+
+``` R
+<div class="ca-card-fn">ca_basins()</div>
+<div class="ca-card-desc">Basin metadata — Basin_ID, centroid lat/lng, country, country_iso3 for any level.</div>
+```
+
+[Read the quickstart
+→](https://s19835.github.io/camelsafr-r/articles/quickstart.md)
+
+# Package index
+
+## Load data
+
+- [`ca_attrs()`](https://s19835.github.io/camelsafr-r/reference/ca_attrs.md)
+  : Return all static attributes for every basin at the given level
+- [`ca_basins()`](https://s19835.github.io/camelsafr-r/reference/ca_basins.md)
+  : Return basin metadata for the given level
+- [`ca_timeseries()`](https://s19835.github.io/camelsafr-r/reference/ca_timeseries.md)
+  : Return climate timeseries for the given level and frequency
+
+## Utilities
+
+- [`ca_info()`](https://s19835.github.io/camelsafr-r/reference/ca_info.md)
+  : Print a summary of the CAMELS-Afr dataset
+- [`ca_clear_cache()`](https://s19835.github.io/camelsafr-r/reference/ca_clear_cache.md)
+  : Clear the camelsafr local Parquet cache
+
+# Articles
+
+### All vignettes
+
+- [Getting Started with
+  camelsafr](https://s19835.github.io/camelsafr-r/articles/quickstart.md):

@@ -1,17 +1,17 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>/404.html</loc></url>
-<url><loc>/LICENSE-text.html</loc></url>
-<url><loc>/LICENSE.html</loc></url>
-<url><loc>/articles/index.html</loc></url>
-<url><loc>/articles/quickstart.html</loc></url>
-<url><loc>/authors.html</loc></url>
-<url><loc>/index.html</loc></url>
-<url><loc>/news/index.html</loc></url>
-<url><loc>/reference/ca_attrs.html</loc></url>
-<url><loc>/reference/ca_basins.html</loc></url>
-<url><loc>/reference/ca_clear_cache.html</loc></url>
-<url><loc>/reference/ca_info.html</loc></url>
-<url><loc>/reference/ca_timeseries.html</loc></url>
-<url><loc>/reference/index.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/404.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/LICENSE-text.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/LICENSE.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/articles/index.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/articles/quickstart.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/authors.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/index.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/news/index.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/reference/ca_attrs.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/reference/ca_basins.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/reference/ca_clear_cache.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/reference/ca_info.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/reference/ca_timeseries.html</loc></url>
+<url><loc>https://s19835.github.io/camelsafr-r/reference/index.html</loc></url>
 </urlset>
 
